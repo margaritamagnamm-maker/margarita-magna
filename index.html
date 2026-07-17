@@ -14,11 +14,12 @@
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background:var(--white);border-bottom:0.5px solid var(--light)}
   .nav-brand{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500;color:var(--black);cursor:pointer}
+  .nav-brand-short{display:none}
   .nav-links{display:flex;gap:32px}
   .nav-links a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s;cursor:pointer}
   .nav-links a:hover,.nav-links a.active{color:var(--black)}
   .nav-right{display:flex;gap:20px;align-items:center}
-  .lang-toggle{font-size:10px;letter-spacing:0.15em;color:var(--grey);cursor:pointer}
+  .lang-toggle{font-size:10px;letter-spacing:0.15em;color:var(--grey);cursor:pointer;white-space:nowrap}
   .lang-toggle .active{color:var(--black);font-weight:500}
   .cart-icon{font-size:10px;letter-spacing:0.12em;color:var(--grey);cursor:pointer}
 
@@ -59,7 +60,6 @@
     .hero-left{border-right:none;border-bottom:0.5px solid var(--light)}
     .hero-left-inner{width:62vw}
     .hero-right-inner{width:76vw}
-    .video-caption{width:62vw}
     nav{padding:14px 16px}
     .nav-brand{font-size:9px;letter-spacing:0.12em}
     .nav-links{gap:10px}
@@ -67,6 +67,13 @@
     .nav-right{gap:8px}
     .lang-toggle{font-size:8px}
     .cart-icon{font-size:8px}
+  }
+  @media (max-width:480px){
+    .nav-brand-full{display:none}
+    .nav-brand-short{display:inline}
+    .nav-links{gap:6px}
+    .nav-links a{letter-spacing:0.04em}
+    .nav-right{gap:6px}
   }
   .video-square{width:100%;aspect-ratio:1;background:#ebebeb;position:relative;overflow:hidden;cursor:pointer;border:0.5px solid var(--light)}
   .video-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
@@ -76,6 +83,9 @@
   .video-square:hover .play-triangle{border-left-color:var(--black)}
   .video-label{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey)}
   .video-caption{font-size:clamp(16px,2.7vw,30px);letter-spacing:0.25em;text-transform:uppercase;color:var(--grey);text-align:center;width:31vw}
+  @media (max-width:768px){
+    .video-caption{width:62vw;font-size:13px;letter-spacing:0.1em;white-space:nowrap}
+  }
   .tagline-strip{padding:44px 40px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;border-top:0.5px solid var(--light);border-bottom:0.5px solid var(--light)}
   @media (max-width:768px){
     .tagline-strip{grid-template-columns:1fr}
@@ -368,7 +378,7 @@
 <body>
 
 <nav>
-  <span class="nav-brand" onclick="showPage('home')">MARGARITA MAGNA</span>
+  <span class="nav-brand" onclick="showPage('home')"><span class="nav-brand-full">MARGARITA MAGNA</span><span class="nav-brand-short">MM</span></span>
   <div class="nav-links">
     <a onclick="showPage('home')" id="nav-home" data-el="ΑΡΧΙΚΗ" data-en="HOME">ΑΡΧΙΚΗ</a>
     <a onclick="showCollections()" id="nav-single" data-el="ΣΥΛΛΟΓΗ" data-en="COLLECTION">ΣΥΛΛΟΓΗ</a>
