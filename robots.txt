@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://margaritamagna.com/sitemap.xml
