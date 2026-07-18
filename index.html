@@ -205,7 +205,8 @@
   .forme-presets-section .forme-presets-title{margin-left:20px}
   @media (max-width:768px){
     #global-board{flex-direction:column !important;align-items:flex-start !important;justify-content:flex-start !important}
-    #global-board-pieces{order:0 !important;flex-basis:auto !important}
+    #global-board-pieces{order:0 !important;flex-basis:auto !important;width:100%;flex-wrap:nowrap !important;overflow-x:auto !important;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+    #global-board-pieces > div{flex-shrink:0}
   }
   .conf-care-text{font-size:9px;line-height:1.7;letter-spacing:0.04em;color:var(--mid);padding:12px 20px 10px;max-width:660px;text-align:justify;flex-shrink:0;padding-top:45px}
   @media (max-width:768px){
@@ -318,6 +319,9 @@
   .lb-sizes-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777;margin-bottom:.5rem}
   .lb-sizes{display:flex;flex-direction:column;gap:6px}
   body.global-board-open .page.active{padding-bottom:220px}
+  @media (max-width:768px){
+    body.global-board-open .page.active{padding-bottom:130px}
+  }
   .compact-sizes .lb-size-dim{font-size:10px!important;white-space:nowrap;}
   .lb-size-row{display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px 10px;border:0.5px solid #333;border-radius:2px;transition:all .12s}
   .lb-size-row:hover{border-color:#666}
