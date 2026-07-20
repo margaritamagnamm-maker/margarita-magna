@@ -12182,9 +12182,40 @@ updateNavCart=function(){_origNav();updateAllCQ();};
   <div id="global-board-pieces" style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;order:1;flex-basis:100%"></div>
   <div style="display:flex;align-items:center;gap:16px;align-self:flex-end">
     <span id="global-board-total" style="font-size:11px;color:#aaa;letter-spacing:.08em"></span>
-    <button class="checkout-btn" data-el="ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ ↗" data-en="COMPLETE ORDER ↗">ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ ↗</button>
+    <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()" data-el="ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ ↗" data-en="COMPLETE ORDER ↗">ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ ↗</button>
   </div>
 </div>
+<script>
+const CHECKOUT_WORKER_URL='https://margarita-magna-checkout.margaritamagna-mm.workers.dev/';
+function startCheckout(){
+  const items=Object.values(cart);
+  if(items.length===0)return;
+  const btn=document.getElementById('checkout-btn');
+  const originalText=btn.textContent;
+  btn.disabled=true;
+  btn.textContent=currentLang==='en'?'PROCESSING…':'ΕΠΕΞΕΡΓΑΣΙΑ…';
+  fetch(CHECKOUT_WORKER_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({items})
+  })
+  .then(function(r){return r.json().then(function(data){return {ok:r.ok,data:data};});})
+  .then(function(res){
+    if(res.ok&&res.data.url){
+      window.location.href=res.data.url;
+    } else {
+      alert(currentLang==='en'?'Something went wrong, please try again.':'Κάτι πήγε στραβά, δοκίμασε ξανά.');
+      btn.disabled=false;
+      btn.textContent=originalText;
+    }
+  })
+  .catch(function(){
+    alert(currentLang==='en'?'Could not connect, please try again.':'Δεν ήταν δυνατή η σύνδεση, δοκίμασε ξανά.');
+    btn.disabled=false;
+    btn.textContent=originalText;
+  });
+}
+</script>
 
 <!-- ── SINGLE PIECE SLIDESHOW LIGHTBOX ── -->
 <div id="slb-overlay" onclick="singleLightboxClose()" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;flex-direction:column">
