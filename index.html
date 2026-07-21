@@ -12198,7 +12198,7 @@ function startCheckout(){
   fetch(CHECKOUT_WORKER_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({items})
+    body:JSON.stringify({items,lang:currentLang})
   })
   .then(function(r){return r.json().then(function(data){return {ok:r.ok,data:data};});})
   .then(function(res){
