@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://margaritamagnamm-maker.github.io/margarita-magna/sitemap.xml
+Sitemap: https://margaritamagna.com/sitemap.xml
